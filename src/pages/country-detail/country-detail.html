@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>País</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-item>
+    <ion-label>Nome:</ion-label>
+    <ion-input [(ngModel)]="country.name" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Capital:</ion-label>
+    <ion-input [(ngModel)]="country.capital" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Continente:</ion-label>
+    <ion-select [(ngModel)]="country.continent" placeholder="Selecione...">
+      <ion-option *ngFor="let item of continentList" [value]="item.name">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>É favorito?</ion-label>
+    <ion-toggle [(ngModel)]="country.isFavorite"></ion-toggle>
+  </ion-item>
+  <ion-row>
+    <ion-col width-50>
+      <button ion-button round full color="secondary" (click)="doSave()">Salvar</button>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button round full color="danger" (click)="doCancel()">Cancelar</button>
+    </ion-col>
+  </ion-row>
+</ion-content>
