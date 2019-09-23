@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cadastre-se</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>
+      <ion-icon name='person'></ion-icon> E-mail:
+    </ion-label>
+    <ion-input [(ngModel)]="user.email" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>
+      <ion-icon name='lock'></ion-icon> Senha:
+    </ion-label>
+    <ion-input [(ngModel)]="user.password" type="password"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col col-10></ion-col>
+    <ion-col col-80>
+      <button ion-button round full color="primary" (click)="doRegister()">Enviar</button>
+    </ion-col>
+    <ion-col col-10></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-30></ion-col>
+    <ion-col>
+      <button ion-button icon-start small clear color="secondary" (click)="goToLogin()">
+        <ion-icon name="arrow-back"></ion-icon>
+        Voltar para login
+      </button>
+    </ion-col>
+    <ion-col col-30></ion-col>
+  </ion-row>
+</ion-content>

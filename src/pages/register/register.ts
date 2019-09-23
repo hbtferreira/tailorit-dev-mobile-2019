@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
-import { TabsPage } from './../tabs/tabs';
-import { RegisterPage } from '../register/register';
+import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 import { UserModel } from '../../models/user-model';
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-register',
+  templateUrl: 'register.html',
 })
-export class LoginPage {
+export class RegisterPage {
 
   user: UserModel;
 
@@ -22,16 +22,24 @@ export class LoginPage {
     this.user = new UserModel();
   }
 
-  doLogin() {
-    this.firebaseAuth.auth.signInWithEmailAndPassword(this.user.email , this.user.password)
+  doRegister(){
+    this.firebaseAuth.auth.createUserWithEmailAndPassword(this.user.email , this.user.password)
       .then((success: any) => {
         this.user.uid = success.user.uid;
         this.user.token = success.user.refreshToken;
-        this.navCtrl.setRoot(TabsPage);
+        let toast = this.toastCtrl.create({
+          message: 'Cadastro realizado com sucesso.',
+          showCloseButton: true,
+          closeButtonText: 'Ok'
+        });
+        toast.onDidDismiss(()=>{
+          this.navCtrl.setRoot(TabsPage);
+        });
+        toast.present();
       })
       .catch((error: any) => {
         let toast = this.toastCtrl.create({
-          message: 'Houve um erro ao efetuar o login.' + error,
+          message: 'Houve um erro ao efetuar seu cadastro: ' + error,
           showCloseButton: true,
           closeButtonText: 'Ok'
         });
@@ -39,7 +47,7 @@ export class LoginPage {
       });
   }
 
-  goToRegister(){
-    this.navCtrl.setRoot(RegisterPage);
+  goToLogin(){
+    this.navCtrl.setRoot(LoginPage);
   }
 }
